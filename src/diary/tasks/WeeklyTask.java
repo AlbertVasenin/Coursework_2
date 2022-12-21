@@ -23,4 +23,5 @@ public class WeeklyTask extends Task implements Repeatability {
   public String getTypeRepeatability() {
     return "Еженедельная ";
   }
+
 }

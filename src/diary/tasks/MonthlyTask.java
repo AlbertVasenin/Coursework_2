@@ -10,6 +10,10 @@ public class MonthlyTask extends Task implements Repeatability {
     super(name, description, type, date);
   }
 
+  public LocalDateTime getDate() {
+    return date;
+  }
+
   @Override
   public LocalDateTime getDateTime(LocalDateTime dateTime) {
     LocalDateTime date = dateTime;

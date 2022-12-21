@@ -9,8 +9,10 @@ import diary.tasks.SingleTask;
 import diary.tasks.Task;
 import diary.tasks.WeeklyTask;
 import diary.tasks.YearlyTask;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,6 +21,8 @@ public class Main {
   private static Task task;
   public static final DateTimeFormatter D_T_FORMAT = DateTimeFormatter.ofPattern(
       "yyyy.MM.dd','HH:mm");
+  public static final DateTimeFormatter D_FORMAT = DateTimeFormatter.ofPattern(
+      "yyyy.MM.dd");
 
   public static void main(String[] args) {
     try (Scanner scanner = new Scanner(System.in)) {
@@ -33,10 +37,14 @@ public class Main {
               inputTask(scanner);
               break;
             case 2:
-              // todo: обрабатываем пункт меню 2
+              System.out.println("Выберите id задачи, которую хотите удалить:\n");
+              System.out.println("Доступные задачи: \n" + diary + "\n");
+              diary.removeMapTask(scanner.nextInt());
+              System.out.println("Задача удалена!");
               break;
             case 3:
-              // todo: обрабатываем пункт меню 3
+              System.out.println("Введите дату и время задачи (ГГГГ.ММ.ДД):");
+              diary.getTaskForDay(LocalDate.parse(scanner.next(), D_FORMAT));
               break;
             case 0:
               break label;
@@ -66,6 +74,15 @@ public class Main {
     LocalDateTime dateTime;
     System.out.println("Введите дату и время задачи (ГГГГ.ММ.ДД,ЧЧ:00):");
     dateTime = LocalDateTime.parse(scanner.next(), D_T_FORMAT);
+    boolean tr = false;
+    while (tr) {
+      try {
+        dateTime = LocalDateTime.parse(scanner.next(), D_T_FORMAT);
+        tr = true;
+      } catch (DateTimeParseException e) {
+        System.out.println("Введите дату корректно!");
+      }
+    }
     System.out.println(
         "Это однократная, ежедневная, еженедельная, ежемесячная, ежегодная задача?");
     switch (scanner.next()) {
@@ -85,11 +102,13 @@ public class Main {
         task = new YearlyTask(taskName, description, typeOfTask, dateTime);
         break;
     }
-    if (diary.addMapTask(task)) {
-      System.out.println("Задача успешно добавлена!");
-      return;
+    try {
+      if (diary.addMapTask(task)) {
+        System.out.println("Задача успешно добавлена!");
+      }
+    } catch (NullPointerException e) {
+      System.out.println("Задача не добавлена! Повторяемость задачи введена неверно!");
     }
-    throw new RuntimeException("Задача не добавлена");
   }
 
   private static void printMenu() {
