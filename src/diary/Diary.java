@@ -81,8 +81,8 @@ public class Diary {
             }
           }
         }
-        for (Entry<Integer, Task> pair : tasksForDay.entrySet()) {
-          System.out.println(pair.getValue());
+        for (Entry<Integer, Task> integerTaskEntry : tasksForDay.entrySet()) {
+          System.out.println(integerTaskEntry.getValue());
         }
       } catch (InputMismatchException e) {
         System.out.println("Вы ввели некорректное значение даты");
