@@ -2,7 +2,9 @@ package diary.tasks;
 
 import diary.Repeatability;
 import diary.TypeOfTask;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 
 public class MonthlyTask extends Task implements Repeatability {
 
@@ -12,6 +14,13 @@ public class MonthlyTask extends Task implements Repeatability {
 
   public LocalDateTime getDate() {
     return date;
+  }
+
+  @Override
+  public boolean appearsIn(LocalDate dateTime) {
+    return date.toLocalDate().equals(dateTime)
+        || (date.toLocalDate().isBefore(ChronoLocalDate.from(dateTime)) &&
+        date.toLocalDate().getDayOfMonth() == dateTime.getDayOfMonth());
   }
 
   @Override
@@ -25,6 +34,6 @@ public class MonthlyTask extends Task implements Repeatability {
 
   @Override
   public String getTypeRepeatability() {
-    return "Ежемесячная ";
+    return "ежемесячная ";
   }
 }

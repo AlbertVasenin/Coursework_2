@@ -1,6 +1,7 @@
 package diary.tasks;
 
 import diary.TypeOfTask;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -62,6 +63,8 @@ public abstract class Task {
   }
 
   public abstract String getTypeRepeatability();
+
+  public abstract boolean appearsIn(LocalDate dateTime);
 
 
   @Override

@@ -2,6 +2,7 @@ package diary.tasks;
 
 import diary.Repeatability;
 import diary.TypeOfTask;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class SingleTask extends Task implements Repeatability {
@@ -11,12 +12,17 @@ public class SingleTask extends Task implements Repeatability {
   }
 
   @Override
+  public boolean appearsIn(LocalDate dateTime) {
+    return date.toLocalDate().equals(dateTime);
+  }
+
+  @Override
   public LocalDateTime getDateTime(LocalDateTime dateTime) {
     return dateTime;
   }
 
   @Override
   public String getTypeRepeatability() {
-    return "Однократная ";
+    return "однократная ";
   }
 }
