@@ -20,6 +20,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Diary {
+
   Map<Integer, Task> tasksForDay = new HashMap<>();
   private final Map<Integer, Task> tasks;
   private Task task;

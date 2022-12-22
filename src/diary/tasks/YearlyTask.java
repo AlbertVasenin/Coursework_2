@@ -4,7 +4,6 @@ import diary.Repeatability;
 import diary.TypeOfTask;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 
 public class YearlyTask extends Task implements Repeatability {
 
