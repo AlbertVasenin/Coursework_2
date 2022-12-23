@@ -18,16 +18,6 @@ public class WeeklyTask extends Task implements Repeatability {
         ChronoLocalDate.from(dateTime)) &&
         date.toLocalDate().getDayOfWeek().equals(dateTime.getDayOfWeek()));
   }
-
-  @Override
-  public LocalDateTime getDateTime(LocalDateTime dateTime) {
-    LocalDateTime date = dateTime;
-    while (date.isBefore(dateTime)) {
-      date = date.plusWeeks(1);
-    }
-    return date;
-  }
-
   @Override
   public String getTypeRepeatability() {
     return "еженедельная ";

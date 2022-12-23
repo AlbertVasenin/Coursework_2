@@ -44,7 +44,7 @@ public class Main {
               break;
             case 3:
               System.out.println("Введите дату и время задачи (ГГГГ.ММ.ДД):");
-              diary.getTaskForDay(LocalDate.parse(scanner.next(), D_FORMAT));
+              System.out.println(diary.getTaskForDay(LocalDate.parse(scanner.next(), D_FORMAT)));
               break;
             case 0:
               break label;

@@ -11,8 +11,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
@@ -39,12 +42,17 @@ public class Diary {
     }
   }
 
-  public void getTaskForDay(LocalDate date) {
-    for (Entry<Integer, Task> integerTaskEntry : tasks.entrySet()) {
-      if (integerTaskEntry.getValue().appearsIn(date)) {
-        System.out.println(integerTaskEntry.getKey() + " " + integerTaskEntry.getValue());
+  public List<Task> getTaskForDay(LocalDate date) {
+    List<Task> result = new ArrayList<>();
+    for (Entry<Integer, Task> entry : tasks.entrySet()) {
+      Task task = entry.getValue();
+      if (task instanceof Repeatability && ((Repeatability) task).appearsIn(date)
+          || !(task instanceof Repeatability) && task.getDate().toLocalDate().equals(date)) {
+        result.add(task);
       }
     }
+    result.sort(Comparator.comparing(Task::getDate));
+    return result;
   }
 
   public Map<Integer, Task> getTasks() {

@@ -17,11 +17,6 @@ public class SingleTask extends Task implements Repeatability {
   }
 
   @Override
-  public LocalDateTime getDateTime(LocalDateTime dateTime) {
-    return dateTime;
-  }
-
-  @Override
   public String getTypeRepeatability() {
     return "однократная ";
   }

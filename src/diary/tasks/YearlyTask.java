@@ -18,15 +18,6 @@ public class YearlyTask extends Task implements Repeatability {
   }
 
   @Override
-  public LocalDateTime getDateTime(LocalDateTime dateTime) {
-    LocalDateTime date = dateTime;
-    while (date.isBefore(dateTime)) {
-      date = date.plusYears(1);
-    }
-    return date;
-  }
-
-  @Override
   public String getTypeRepeatability() {
     return "ежегодная ";
   }

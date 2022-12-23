@@ -23,15 +23,6 @@ public class DailyTask extends Task implements Repeatability {
   }
 
   @Override
-  public LocalDateTime getDateTime(LocalDateTime dateTime) {
-    LocalDateTime date = dateTime;
-    while (date.isBefore(dateTime)) {
-      date = date.plusDays(1);
-    }
-    return date;
-  }
-
-  @Override
   public String getTypeRepeatability() {
     return "ежедневная ";
   }
